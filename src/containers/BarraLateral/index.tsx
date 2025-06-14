@@ -1,18 +1,52 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { FiltroCard } from '../../components/FiltroCard'
 import { Aside, Campo, Filtros } from './styles'
+import { RootReducer } from '../../store'
+import { alterarTermo } from '../../store/reducers/filtro'
+import * as enums from '../../utils/enums/Tarefa'
 
-export const BarraLateral = () => (
-  <Aside>
-    <div>
-      <Campo type="text" placeholder="Buscar" />
-      <Filtros>
-        <FiltroCard legenda="pedentes" contador={1} ativo={false} />
-        <FiltroCard legenda="concluídas" contador={2} ativo={false} />
-        <FiltroCard legenda="urgentes" contador={3} ativo={false} />
-        <FiltroCard legenda="importantes" contador={4} ativo={false} />
-        <FiltroCard legenda="normal" contador={5} ativo={false} />
-        <FiltroCard legenda="todas" contador={10} ativo />
-      </Filtros>
-    </div>
-  </Aside>
-)
+export const BarraLateral = () => {
+  const dispatch = useDispatch()
+  const { termo } = useSelector((state: RootReducer) => state.filtro)
+
+  return (
+    <Aside>
+      <div>
+        <Campo
+          type="text"
+          placeholder="Buscar"
+          value={termo}
+          onChange={(evento) => dispatch(alterarTermo(evento.target.value))}
+        />
+        <Filtros>
+          <FiltroCard
+            valor={enums.Status.PENDENTE}
+            criterio="status"
+            legenda="pedentes"
+          />
+          <FiltroCard
+            valor={enums.Status.CONCLUIDA}
+            criterio="status"
+            legenda="concluídas"
+          />
+          <FiltroCard
+            valor={enums.Prioridade.URGENT}
+            criterio="prioridade"
+            legenda="urgentes"
+          />
+          <FiltroCard
+            valor={enums.Prioridade.IMPORTANT}
+            criterio="prioridade"
+            legenda="importantes"
+          />
+          <FiltroCard
+            valor={enums.Prioridade.NORMAL}
+            criterio="prioridade"
+            legenda="normal"
+          />
+          <FiltroCard criterio="todas" legenda="todas" />
+        </Filtros>
+      </div>
+    </Aside>
+  )
+}

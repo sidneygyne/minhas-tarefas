@@ -24,7 +24,7 @@ import { Prioridade, Status } from '../utils/enums/Tarefa'
 
 // versao simplificada:
 
-export class Tarefa {
+export class TarefaClass {
   constructor(
     public titulo: string,
     public prioridade: Prioridade,
