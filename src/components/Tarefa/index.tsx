@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   BarraAcoes,
@@ -9,9 +9,10 @@ import {
   Tag,
   Titulo
 } from './styles'
-import { remover, editar } from '../../store/reducers/tarefas'
+import { remover, editar, alteraStatus } from '../../store/reducers/tarefas'
 import { TarefaClass } from '../../models/Tarefa'
 import { BotaoSalvar } from '../../styles'
+import { Status } from '../../utils/enums/Tarefa'
 
 type Props = TarefaClass
 
@@ -50,9 +51,24 @@ export const Tarefa = ({
     setEstaEditando(false)
   }
 
+  function alteraStatusTarefa(evento: ChangeEvent<HTMLInputElement>) {
+    dispatch(alteraStatus({ id, finalizado: evento.target.checked }))
+  }
+
   return (
     <Card>
-      <Titulo>{titulo}</Titulo>
+      <label htmlFor={titulo}>
+        <input
+          type="checkbox"
+          id={titulo}
+          checked={status === Status.CONCLUIDA}
+          onChange={alteraStatusTarefa}
+        />
+        <Titulo>
+          {estaEditando && <em>Editando: </em>}
+          {titulo}
+        </Titulo>
+      </label>
       <Tag parametro="prioridade" prioridade={prioridade}>
         {prioridade}
       </Tag>
