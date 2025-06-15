@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+import { useNavigate } from 'react-router-dom'
 import { FiltroCard } from '../../components/FiltroCard'
 import { Aside, Filtros } from './styles'
-import { RootReducer } from '../../store'
 import { alterarTermo } from '../../store/reducers/filtro'
-import * as enums from '../../utils/enums/Tarefa'
 import { Botao, Campo } from '../../styles'
-import { useNavigate } from 'react-router-dom'
+import * as enums from '../../utils/enums/Tarefa'
 
 type Props = { mostrarFiltros: boolean }
 

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { Tarefa } from '../../components/Tarefa'
 import { RootReducer } from '../../store'
+import { Tarefa } from '../../components/Tarefa'
 import { MainContainer, Titulo } from '../../styles'
 
 export const ListaDeTarefas = () => {

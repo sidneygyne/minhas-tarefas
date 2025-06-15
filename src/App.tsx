@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, EstiloGlobal } from './styles'
 import { Provider } from 'react-redux'
 import { store } from './store'
