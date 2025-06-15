@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   BarraAcoes,
-  Botao,
   BotaoCancelarRemover,
   Card,
   Descricao,
@@ -11,7 +10,7 @@ import {
 } from './styles'
 import { remover, editar, alteraStatus } from '../../store/reducers/tarefas'
 import { TarefaClass } from '../../models/Tarefa'
-import { BotaoSalvar } from '../../styles'
+import { Botao, BotaoSalvar } from '../../styles'
 import { Status } from '../../utils/enums/Tarefa'
 
 type Props = TarefaClass
