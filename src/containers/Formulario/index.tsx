@@ -4,7 +4,6 @@ import { Form, Opcao, Opcoes } from './styles'
 import { useDispatch } from 'react-redux'
 import { Prioridade, Status } from '../../utils/enums/Tarefa'
 import { cadastar } from '../../store/reducers/tarefas'
-import { TarefaClass } from '../../models/Tarefa'
 import { useNavigate } from 'react-router-dom'
 
 export const Formulario = () => {
@@ -16,15 +15,15 @@ export const Formulario = () => {
 
   const cadastarTarefa = (evento: FormEvent) => {
     evento.preventDefault()
-    const tarefaParaAdicionar = new TarefaClass(
-      titulo,
-      prioridade,
-      Status.PENDENTE,
-      descricao,
-      101
-    )
 
-    dispatch(cadastar(tarefaParaAdicionar))
+    dispatch(
+      cadastar({
+        titulo,
+        prioridade,
+        descricao,
+        status: Status.PENDENTE
+      })
+    )
     navigate('/')
   }
 

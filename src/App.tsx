@@ -1,7 +1,5 @@
 import React from 'react'
 import { Container, EstiloGlobal } from './styles'
-import { BarraLateral } from './containers/BarraLateral'
-import { ListaDeTarefas } from './containers/ListaDeTarefas'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
