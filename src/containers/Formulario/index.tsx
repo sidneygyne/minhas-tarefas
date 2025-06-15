@@ -1,0 +1,69 @@
+import { FormEvent, useState } from 'react'
+import { BotaoSalvar, Campo, MainContainer, Titulo } from '../../styles'
+import { Form, Opcao, Opcoes } from './styles'
+import { useDispatch } from 'react-redux'
+import { Prioridade, Status } from '../../utils/enums/Tarefa'
+import { cadastar } from '../../store/reducers/tarefas'
+import { TarefaClass } from '../../models/Tarefa'
+import { useNavigate } from 'react-router-dom'
+
+export const Formulario = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [titulo, setTitulo] = useState('')
+  const [descricao, setDescricao] = useState('')
+  const [prioridade, setPrioridade] = useState(Prioridade.NORMAL)
+
+  const cadastarTarefa = (evento: FormEvent) => {
+    evento.preventDefault()
+    const tarefaParaAdicionar = new TarefaClass(
+      titulo,
+      prioridade,
+      Status.PENDENTE,
+      descricao,
+      101
+    )
+
+    dispatch(cadastar(tarefaParaAdicionar))
+    navigate('/')
+  }
+
+  return (
+    <MainContainer>
+      <Titulo>Nova tarefa</Titulo>
+      <Form onSubmit={cadastarTarefa}>
+        <Campo
+          value={titulo}
+          onChange={(evento) => setTitulo(evento.target.value)}
+          type="text"
+          placeholder="Título"
+        />
+        <Campo
+          value={descricao}
+          onChange={(evento) => setDescricao(evento.target.value)}
+          as="textarea"
+          placeholder="Descrição da tarefa"
+        ></Campo>
+        <Opcoes>
+          <p>Prioridade</p>
+          {Object.values(Prioridade).map((prioridade) => (
+            <Opcao key={prioridade}>
+              <input
+                onChange={(evento) =>
+                  setPrioridade(evento.target.value as Prioridade)
+                }
+                value={prioridade}
+                name="prioridade"
+                type="radio"
+                id={prioridade}
+                defaultChecked={prioridade === Prioridade.NORMAL}
+              />{' '}
+              <label htmlFor={prioridade}>{prioridade}</label>
+            </Opcao>
+          ))}
+        </Opcoes>
+        <BotaoSalvar type="submit">Cadastrar</BotaoSalvar>
+      </Form>
+    </MainContainer>
+  )
+}

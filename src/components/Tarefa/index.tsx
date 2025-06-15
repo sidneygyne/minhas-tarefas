@@ -4,15 +4,14 @@ import {
   BarraAcoes,
   Botao,
   BotaoCancelarRemover,
-  BotaoSalvar,
   Card,
   Descricao,
   Tag,
   Titulo
 } from './styles'
-// import { Prioridade, Status } from '../../utils/enums/Tarefa'
 import { remover, editar } from '../../store/reducers/tarefas'
 import { TarefaClass } from '../../models/Tarefa'
+import { BotaoSalvar } from '../../styles'
 
 type Props = TarefaClass
 
